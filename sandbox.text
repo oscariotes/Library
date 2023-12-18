@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Book Input Form</title>
+</head>
+<body>
+  <h1>Add a New Book</h1>
+  
+  <form id="bookForm">
+    <label for="title">Title:</label>
+    <input type="text" id="title" required><br><br>
+    
+    <label for="author">Author:</label>
+    <input type="text" id="author" required><br><br>
+    
+    <label for="genre">Genre:</label>
+    <input type="text" id="genre" required><br><br>
+    
+    <label for="year">Year:</label>
+    <input type="number" id="year" required><br><br>
+    
+    <button type="button" onclick="addBook()">Add Book</button>
+  </form>
+  
+  <h2>Book List</h2>
+  <ul id="bookList"></ul>
+
+  <script>
+    let books = [];
+
+    function addBook() {
+      const title = document.getElementById('title').value;
+      const author = document.getElementById('author').value;
+      const genre = document.getElementById('genre').value;
+      const year = document.getElementById('year').value;
+
+      const newBook = {
+        title: title,
+        author: author,
+        genre: genre,
+        year: year
+      };
+
+      books.push(newBook);
+      displayBooks();
+      resetForm();
+    }
+
+    function displayBooks() {
+      const bookList = document.getElementById('bookList');
+      bookList.innerHTML = '';
+
+      books.forEach(book => {
+        const li = document.createElement('li');
+        li.textContent = `${book.title} by ${book.author} (${book.year}) - Genre: ${book.genre}`;
+        bookList.appendChild(li);
+      });
+    }
+
+    function resetForm() {
+      document.getElementById('bookForm').reset();
+    }
+  </script>
+</body>
+</html>
